@@ -14,7 +14,6 @@ export default class InvoiceService extends Service {
       console.log(data);
       return Promise.resolve(data.invoice);
     } catch (err) {
-      console.error('FUCKING ERROR');
       console.error(err);
       return Promise.reject(err);
     }

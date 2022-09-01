@@ -4,7 +4,7 @@
         <button class="btn btn-cust" {{on 'click' this.openModalToSave}} type="button">Add</button>
     </div>
 
-    <DataTable @sortBy={{this.sortBy}} @order={{this.order}} @setSorting={{this.setSorting}} @headers={{this.headers}} @dataList={{this.invoices}} @onEdit={{this.onEdit}} @onDelete={{this.onDelete}}></DataTable>
+    <DataTable @sortBy={{this.sortBy}} @order={{this.order}} @setSorting={{this.setSorting}} @headers={{this.headers}} @dataList={{this.invoices}} @onEdit={{this.onEdit}} @onDelete={{this.onDelete}} @onView={{this.onView}}> </DataTable>
 
 </div>
 <InvoiceModal @invoice={{this.invoiceData}} @opt={{this.opt}} @onDataSave={{this.onDataSave}}></InvoiceModal>

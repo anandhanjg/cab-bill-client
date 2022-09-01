@@ -4,6 +4,7 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import $ from 'jquery';
 import { convertToDateTimeLocal } from '../../util/util';
+import EndpointService from '../../util/endpoint';
 
 const initInvoiceValue = {
   customerName: '',
@@ -158,5 +159,10 @@ export default class InvoicesComponent extends Component {
   @action
   onDataSave() {
     this.getInvoices();
+  }
+
+  @action
+  async onView(data){
+    window.open(EndpointService.url+'/invoices/bill/'+data.invoiceNo,'__blank');
   }
 }

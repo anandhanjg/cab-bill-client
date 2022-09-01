@@ -30,12 +30,18 @@
                     {{/each}}
                     {{#if this.visibleAction}}
                         <td>
+                            {{#if @onView}}
+                                <i class="fas fa-eye m-1 t-icon" style="color:var(--secondary-color);" {{on 'click' (fn @onView data)}}></i>
+                            {{/if}}
+
                             {{#if @onEdit}}
                                 <i class="fas fa-edit m-1 t-icon" {{on 'click' (fn @onEdit data)}}></i>
                             {{/if}}
+
                             {{#if @onDelete}}
                                 <i class="fas fa-times-square m-1 t-icon" style="color:#ff0000;" {{on 'click' (fn @onDelete data)}}></i>
                             {{/if}}
+    
                         </td>
                     {{/if}}
                 </tr>
