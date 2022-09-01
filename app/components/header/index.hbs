@@ -1,0 +1,31 @@
+<header>
+    <nav>
+        {{!-- <button > <i class="fas fa-bars"></i> </button> --}}
+        <ul >
+            <li>
+                <LinkTo class="{{if (eq this.routeName 'travels') 'selected' ''}}" id="travels" @route="home.travels" >
+                    <i class="fas fa-car">&nbsp;</i>
+                    <span>Travels</span>
+                </LinkTo>
+            </li>
+            <li>
+                <LinkTo class="{{if (eq this.routeName 'invoices') 'selected' ''}}" @route="home.invoices" id="invoices">
+                    <i class="fas fa-file-invoice">&nbsp;</i>
+                    <span>Invoices</span>
+                </LinkTo>
+            </li>
+            <li>
+                <LinkTo class="{{if (eq this.routeName 'profile') 'selected' ''}}"  @route="home.profile">
+                    <i class="fas fa-user">&nbsp;</i>
+                    <span>Profile</span>
+                </LinkTo>
+            </li>
+
+            <li class="logout">
+                <a href="javascript:void(0);" {{on 'click' this.logout}}>
+                    <i class="fas fa-right-from-bracket"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>

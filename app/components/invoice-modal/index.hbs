@@ -1,0 +1,319 @@
+<form {{on 'submit' this.onSubmit}} {{did-insert this.setInvoiceData @invoice}} {{did-update this.setInvoiceData @invoice}}>
+<div class="modal fade" id="invoice-modal" tabindex="-1">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Invoice</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="overflow-x: hidden;">
+        
+        {{!-- Basic Details --}}
+        <div class="w-100 row">
+            <div class="m-1 card col invoice-card">    
+            <span class="invoice-card-title">Vehicle Details</span>
+            <div class="card-body">
+                <div class="form-group row m-3"> 
+                    <div class="col">
+                      <label for="vehicleName">Vehicle Name: </label>
+                    </div>
+                    <div class="col">
+                      <Input id="vehicleName" name="name" class="form-control" @value={{this.invoiceData.vehicleName}} required/>
+                    </div>
+                </div>
+                <div class="form-group row m-3"> 
+                  <div class="col">
+                    <label for="vehicleNo">Vehicle Number: </label>
+                  </div>
+                  <div class="col">
+                    <Input id="vehicleNo" @type="text" name="vehicleNo" class="form-control" @value={{this.invoiceData.vehicleNo}} required/>
+                  </div>
+                </div>
+                <div class="form-group row m-3"> 
+                  <div class="col">
+                    <label for="totalSeats">Total Seats: </label>
+                  </div>
+                  <div class="col">
+                    <Input id="totalSeats" @type="number" name="totalSeats" class="form-control" @value={{this.invoiceData.totalSeats}} required/>
+                  </div>
+                </div>
+            </div>
+            </div>
+
+            <div class="m-1 card col invoice-card">    
+                <span class="invoice-card-title">Customer Details</span>
+                <div class="card-body">
+                    <div class="form-group row m-3"> 
+                        <div class="col">
+                          <label for="customerName">Name: </label>
+                        </div>
+                        <div class="col">
+                          <Input id="customerName" name="customerName" class="form-control" @value={{this.invoiceData.customerName}} required/>
+                        </div>
+                    </div>
+                    <div class="form-group row m-3"> 
+                      <div class="col">
+                        <label for="customerEmail">Email: </label>
+                      </div>
+                      <div class="col">
+                        <Input id="customerEmail" @type="email" name="customerEmail" class="form-control" @value={{this.invoiceData.customerEmail}}/>
+                      </div>
+                    </div>
+                    <div class="form-group row m-3"> 
+                      <div class="col">
+                        <label for="customerMobile">Mobile: </label>
+                      </div>
+                      <div class="col">
+                        <Input id="customerMobile" @type="text"  name="customerMobile" class="form-control" @value={{this.invoiceData.customerMobile}}/>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="m-1 card col invoice-card">    
+                <span class="invoice-card-title">Odameter Details</span>
+                <div class="card-body">
+                    <div class="form-group row m-3"> 
+                        <div class="col">
+                          <label for="startingKm">Starting km: </label>
+                        </div>
+                        <div class="col">
+                          <Input id="startingKm" @type="number" min="0" name="name" class="form-control" @value={{this.invoiceData.startingKm}} required/>
+                        </div>
+                    </div>
+                    <div class="form-group row m-3"> 
+                      <div class="col">
+                        <label for="endingKm">Ending Km: </label>
+                      </div>
+                      <div class="col">
+                        <Input id="endingKm" @type="number" min="0" name="endingKm" class="form-control" @value={{this.invoiceData.endingKm}} required/>
+                      </div>
+                    </div>
+                    <div class="form-group row m-3"> 
+                        <div class="col">
+                          <label for="kmTravelled">Km Travelled: </label>
+                        </div>
+                        <div class="col">
+                          <Input id="kmTravelled" min={{this.invoiceData.startingKm}} @type="number" name="kmTravelled" class="form-control" @value={{(diff this.invoiceData.endingKm this.invoiceData.startingKm)}} readonly/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{!-- Timing Details --}}
+        <div class="w-100 mt-2 row">
+            
+        <div class="m-1 card col invoice-card">    
+            <span class="invoice-card-title">Timing Details</span>
+            <div class="card-body">
+                <div class="form-group row m-3"> 
+                    <div class="col">
+                      <label for="tripStartingDate">Starting Date: </label>
+                    </div>
+                    <div class="col">
+                      <Input id="tripStartingDate" @type="datetime-local" name="tripStartingDate" class="form-control" @value={{this.invoiceData.tripStartingDate}} required/>
+                    </div>
+                </div>
+                <div class="form-group row m-3"> 
+                  <div class="col">
+                    <label for="tripEndDate">Ending Date: </label>
+                  </div>
+                  <div class="col">
+                    <Input id="tripEndDate" @type="datetime-local" name="tripEndDate" class="form-control" @value={{this.invoiceData.tripEndDate}} required/>
+                  </div>
+                </div>
+                <div class="form-group row m-3"> 
+                  <div class="col">
+                    <label for="hoursTravelled">Hours Travelled: </label>
+                  </div>
+                  <div class="col">
+                    <Input id="hoursTravelled" @type="text" name="hourTravelled" class="form-control" @value={{(dateOpt this.invoiceData.tripEndDate this.invoiceData.tripStartingDate 'HOURS')}} readonly/>
+                  </div>
+                </div>
+                <div class="form-group row m-3"> 
+                  <div class="col">
+                    <label for="daysTravelled">Days Travelled: </label>
+                  </div>
+                  <div class="col">
+                    <Input id="daysTravelled" @type="text"  name="daysTravelled" class="form-control" @value={{(dateOpt this.invoiceData.tripEndDate this.invoiceData.tripStartingDate 'DAYS')}} readonly/>
+                  </div>
+                </div>
+            </div>
+        </div>
+
+        
+        </div>
+
+        
+        {{!-- Pricing Details Nav Bar --}}
+        <div class="w-100 mt-2 row">
+            <div class="m-1 card col invoice-card">    
+            <span class="invoice-card-title">Location and Pricing Details</span>
+              <div class="card-body">
+                  <ul class="mt-2 nav nav-tabs">
+                    <li class="nav-item">
+                      <a class="nav-link {{if (eq this.billType 'KM_CHARGE') 'active' ''}}" aria-current="page" {{on 'click' (fn this.setBillType 'KM_CHARGE')}}>KM Charge</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link {{if (eq this.billType 'KM_AND_VEH_CHARGE') 'active' ''}}" {{on 'click' (fn this.setBillType 'KM_AND_VEH_CHARGE')}}>KM and Vehicle Charge</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link {{if (eq this.billType 'HOUR_CHARGE') 'active' ''}}" {{on 'click' (fn this.setBillType 'HOUR_CHARGE')}} >Hour Charge</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link {{if (eq this.billType 'HOUR_AND_KM_CHARGE') 'active' ''}}" {{on 'click' (fn this.setBillType 'HOUR_AND_KM_CHARGE')}}>Hour and Km Charge</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link {{if (eq this.billType 'PACKAGE') 'active' ''}}" {{on 'click' (fn this.setBillType 'PACKAGE')}} >Fixed Package</a>
+                    </li>
+                  </ul>
+                  <div>
+
+                        {{#if (trip this.billType 'KM')}}
+                            <div class="row m-2 w-75"> 
+                                <div class="col-3">
+                                  <label for="nonAcKms1">Non A/C Kilometers: </label>
+                                </div>
+                                <div class="col-3">
+                                  <Input id="nonAcKms1" name="nonAcKms1" class="form-control" @value={{this.invoiceData.nonAcKms}} required/>
+                                </div>
+                                <div class="col-3">
+                                  <label for="nonAcChargePerKm1">Non A/C Price Per Km: </label>
+                                </div>
+                                <div class="col-3">
+                                  <Input id="nonAcChargePerKm1" name="nonAcChargePerKm1" class="form-control" @value={{this.invoiceData.nonAcChargePerKm}} required/>
+                                </div>
+                            </div>
+                            <div class="row m-2 w-75"> 
+                                <div class="col-3">
+                                  <label for="acKms">A/C Kilometers: </label>
+                                </div>
+                                <div class="col-3">
+                                  <Input id="acKms" name="acKms" class="form-control" @value={{this.invoiceData.acKms}} required/>
+                                </div>
+                                <div class="col-3">
+                                  <label for="acChargePerKm">A/C Price Per Km: </label>
+                                </div>
+                                <div class="col-3">
+                                  <Input id="acChargePerKm" name="acChargePerKm" class="form-control" @value={{this.invoiceData.acChargePerKm}} required/>
+                                </div>
+                            </div>
+                        {{/if}}
+                        
+                        {{#if (trip this.billType 'HOUR')}}
+                            <div class="row m-2 w-75">
+                                <div class="col-3">
+                                    <label for="chargePerHour">Charge Per Hour: </label>
+                                  </div>
+                                  <div class="col-3">
+                                    <Input id="chargePerHour" name="chargePerHour" class="form-control" @value={{this.invoiceData.chargePerHour}} required/>
+                                  </div>
+                            </div>
+                        {{/if}}
+                        
+                        {{#if (eq this.billType 'KM_AND_VEH_CHARGE')}}
+                            <div class="row m-2 w-75">
+                                <div class="col-3">
+                                    <label for="vehicleChargePerDay">Vehicle Charge Per Day: </label>
+                                  </div>
+                                  <div class="col-3">
+                                    <Input id="vehicleChargePerDay" name="vehicleChargePerDay" class="form-control" @value={{this.invoiceData.vehicleChargePerDay}} required/>
+                                  </div>
+                            </div>                
+                        {{else if (eq this.billType 'PACKAGE')}}
+                            <div class="row m-2 w-75">
+                                <div class="col-3">
+                                    <label for="packageAmount">Package Amount: </label>
+                                  </div>
+                                  <div class="col-3">
+                                    <Input id="packageAmount" @type="number" name="packageAmount" class="form-control" @value={{this.invoiceData.packageAmount}} required/>
+                                  </div>
+                            </div> 
+                            <div class="row m-2 w-75">
+                                <div class="col-3">
+                                    <label for="packageTripCity">Package City Name: </label>
+                                  </div>
+                                  <div class="col-3">
+                                    <Input id="packageTripCity" name="packageTripCity" class="form-control" @value={{this.invoiceData.packageTripCity}} required/>
+                                  </div>
+                            </div> 
+                        {{/if}}
+
+                        {{#if (ne this.billType 'PACKAGE')}}
+                            <div class="row m-2 w-75">
+                              <div class="col-3">
+                                    <label for="locationsCovered">Locations Covered: </label>
+                                  </div>
+                                  <div class="col-3">
+                                    <Input id="locationsCovered" name="locationsCovered" placeholder="Please Enter comma(,) separated values" class="form-control" @value={{this.invoiceData.locationsCovered}} required/>
+                                </div>
+                            </div> 
+                        {{/if}}
+                  </div>
+              </div>
+            </div>
+        </div>
+        
+        {{!-- Travels Selectin And Other Details --}}
+        <div class="w-100 mt-3 row">
+            
+        <div class="m-1 card col invoice-card">    
+            <span class="invoice-card-title">Travels Selection and Others</span>
+            <div class="card-body">
+                <div class="form-group row m-3"> 
+                    <div class="col">
+                      <label for="name">Travels: </label>
+                    </div>
+                    <div class="col">
+                      <select class="form-select" {{on 'change' this.onTravelSelect}} value={{this.invoiceData.travel_id}} required>
+                              <option value="">Select Travels</option>
+                          {{#each this.travels as |tvl|}}
+                              <option value={{tvl.id}}>{{tvl.name}}</option>
+                          {{/each}}
+                      </select>
+                    </div>
+                </div>
+                <div class="form-group row m-3"> 
+                  <div class="col">
+                    <label for="driverBatta">Driver Batta: </label>
+                  </div>
+                  <div class="col">
+                    <Input id="driverBatta" @type="number" min="0" name="driverBatta" class="form-control" @value={{this.invoiceData.driverBatta}}/>
+                  </div>
+                </div>
+                <div class="form-group row m-3"> 
+                  <div class="col">
+                    <label for="tollGateCharge">Toll Amount: </label>
+                  </div>
+                  <div class="col">
+                    <Input id="tollGateCharge" @type="text" name="tollGateCharge" class="form-control" @value={{this.invoiceData.tollGateCharge}}/>
+                  </div>
+                </div>
+                <div class="form-group row m-3"> 
+                  <div class="col">
+                    <label for="parkingCharge">Parking Amount: </label>
+                  </div>
+                  <div class="col">
+                    <Input id="parkingCharge" @type="text" name="parkingCharge" class="form-control" @value={{this.invoiceData.parkingCharge}}/>
+                  </div>
+                </div>
+            </div>
+        </div>
+
+        
+        </div>
+
+        
+      </div>
+      <div class="modal-footer">
+          {{#if this.error}}
+            <div class="alert alert-danger mt-3" role="alert">{{this.error}}</div>
+          {{/if}}
+          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-outline-primary">{{if this.isSave 'Save' 'Update'}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>

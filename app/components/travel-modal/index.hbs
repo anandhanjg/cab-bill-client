@@ -1,0 +1,77 @@
+<form {{on 'submit' this.onSubmit}} {{did-insert this.setTravelData @travel}} {{did-update this.setTravelData @travel}}>
+<div class="modal fade" id="travel-modal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Travels</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group row m-3"> 
+          <div class="col">
+            <label for="name">Name: </label>
+          </div>
+          <div class="col">
+            <Input id="name" name="name" class="form-control" @value={{this.travelData.name}} required/>
+          </div>
+        </div>
+        <div class="form-group row m-3"> 
+          <div class="col">
+            <label for="email">Email: </label>
+          </div>
+          <div class="col">
+            <Input id="email" @type="email" name="email" class="form-control" @value={{this.travelData.email}} required/>
+          </div>
+        </div>
+        <div class="form-group row m-3"> 
+          <div class="col">
+            <label for="mobile">Mobile: </label>
+          </div>
+          <div class="col">
+            <Input id="mobile" @type="text" pattern="\d{10}" name="mobile" class="form-control" @value={{this.travelData.mobile}} required/>
+          </div>
+        </div>
+        <div class="form-group row m-3"> 
+          <div class="col">
+            <label for="doorNo">Door No: </label>
+          </div>
+          <div class="col">
+            <Input id="doorNo" @type="text" name="doorNo" class="form-control" @value={{this.travelData.doorNo}} required/>
+          </div>
+        </div>
+        <div class="form-group row m-3"> 
+          <div class="col">
+            <label for="street">Street: </label>
+          </div>
+          <div class="col">
+            <Input id="street" @type="text" name="street" class="form-control" @value={{this.travelData.street}} required/>
+          </div>
+        </div>
+        <div class="form-group row m-3"> 
+          <div class="col">
+            <label for="city">City: </label>
+          </div>
+          <div class="col">
+            <Input id="city" @type="text" name="city" class="form-control" @value={{this.travelData.city}} required/>
+          </div>
+        </div>
+        <div class="form-group row m-3"> 
+          <div class="col">
+            <label for="pinCode">Pin Code: </label>
+          </div>
+          <div class="col">
+            <Input id="pinCode" @type="text" name="pinCode" class="form-control" @value={{this.travelData.pinCode}} required/>
+          </div>
+        </div>
+        {{#if this.error}}
+          <div class="alert alert-danger mt-3" role="alert">{{this.error}}</div>
+        {{/if}}
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-outline-primary">{{if this.isSave 'Save' 'Update'}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>

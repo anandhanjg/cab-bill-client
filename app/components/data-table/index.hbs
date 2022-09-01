@@ -1,0 +1,46 @@
+<table class="table table-bordered">
+        <thead>
+            <tr>
+                {{#each @headers as |header|}}
+                    <th>
+                        {{#if @sortBy}}
+                            {{#if (eq @sortBy header.key)}}
+                                <i class="fas {{if (eq @order 1) 'fa-angle-up' 'fa-angle-down'}} sorting-icon sorting-icon-active" {{on 'click' (fn @setSorting header.key (corder @order))}}>
+                                </i>
+                            {{else}}
+                                <i class="fas fa-angle-up sorting-icon" {{on 'click' (fn @setSorting header.key 1)}}>
+                                </i>
+                            {{/if}}
+                        {{/if}}
+                        
+                        {{header.displayValue}}
+                        
+                    </th>
+                {{/each}}
+                {{#if this.visibleAction}}
+                    <th>Action</th>
+                {{/if}}
+            </tr>
+        </thead>
+        <tbody>
+            {{#each @dataList as |data|}}
+                <tr>
+                    {{#each @headers as |header|}}
+                        <td>{{get data header.key}}</td>
+                    {{/each}}
+                    {{#if this.visibleAction}}
+                        <td>
+                            {{#if @onEdit}}
+                                <i class="fas fa-edit m-1 t-icon" {{on 'click' (fn @onEdit data)}}></i>
+                            {{/if}}
+                            {{#if @onDelete}}
+                                <i class="fas fa-times-square m-1 t-icon" style="color:#ff0000;" {{on 'click' (fn @onDelete data)}}></i>
+                            {{/if}}
+                        </td>
+                    {{/if}}
+                </tr>
+            {{else}}
+                <tr><td colspan={{this.tdColsSpan}}><h6 style="text-align: center;">No Data Found !</h6></td></tr>
+            {{/each}}
+        </tbody>
+</table>

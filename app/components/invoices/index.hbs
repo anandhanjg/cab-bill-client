@@ -1,0 +1,10 @@
+<div class="container">
+    <div class="d-flex justify-content-between m-3">
+        <h5>Invoices Details</h5>
+        <button class="btn btn-cust" {{on 'click' this.openModalToSave}} type="button">Add</button>
+    </div>
+
+    <DataTable @sortBy={{this.sortBy}} @order={{this.order}} @setSorting={{this.setSorting}} @headers={{this.headers}} @dataList={{this.invoices}} @onEdit={{this.onEdit}} @onDelete={{this.onDelete}}></DataTable>
+
+</div>
+<InvoiceModal @invoice={{this.invoiceData}} @opt={{this.opt}} @onDataSave={{this.onDataSave}}></InvoiceModal>

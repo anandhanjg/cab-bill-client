@@ -1,0 +1,23 @@
+<div class="login-div">
+    <form class="w-50 h-75"  autocomplete="off" {{on 'submit' this.authenticate}} >
+        <h3><i>Login</i></h3>
+
+        <div class="col-md-4 m-2">
+            <Input class="form-control" autocomplete="off" id="username" formControlName="username" @type="text" @value={{this.username}} required placeholder="Enter Username"/>
+        </div>
+
+        <div class="col-md-4 m-2">
+            <Input class="form-control" autocomplete="off" formControlName="password" id="password" @type="password" @value={{this.password}}  placeholder="Enter Password" required/>
+        </div>
+
+        <div class="form-group">
+            <input class="btn btn-cust" value="Sign In" type="submit"/>
+        </div>
+        {{#if this.error}}
+            <span class="error">{{this.error}}</span>
+        {{/if}}
+        <div class="btl-link-div">
+            <LinkTo @route="register" class="btl-link" >Sign Up!</LinkTo>
+        </div>        
+    </form>
+</div>

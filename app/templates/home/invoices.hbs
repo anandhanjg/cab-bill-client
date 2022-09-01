@@ -1,0 +1,9 @@
+{{page-title "Invoices"}}
+{{#if @model}}
+<Invoices></Invoices>
+{{else}}
+    <div class="d-flex justify-content-center flex-column align-items-center" style="margin-top: 150px;">
+        <h6>Sorry! Please Add a Travels to create Invoice.</h6>
+        <LinkTo @route="home" class="btn btn-cust">Go To Travels</LinkTo>
+    </div>
+{{/if}}

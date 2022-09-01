@@ -1,0 +1,43 @@
+<div class="register-div">
+    <form class="w-50 h-75" {{on 'submit' this.onSubmit}}>
+        <h3><i>Sign up</i></h3>
+        
+        <div class="col-md-4 m-2">
+            <Input  class="form-control" autocomplete="off" id="firstName" formControlName="firstName" @type="text" @value={{this.registerData.firstName}} required placeholder="First Name"/>    
+        </div>
+
+        <div class="col-md-4 m-2">
+            <Input  class="form-control" autocomplete="off" id="lastName" formControlName="lastName" @type="text" @value={{this.registerData.lastName}} required placeholder="Last Name"/>    
+        </div>
+        
+        <div class="col-md-4 m-2">
+            <Input class="form-control" autocomplete="off" id="email" formControlName="email" @type="email" @value={{this.registerData.email}} required placeholder="Email"/>    
+        </div>
+
+        <div class="col-md-4 m-2">
+            <Input class="form-control" oninvalid="this.setCustomValidity('Mobile Number Should be 10 digits numeric value')" autocomplete="off" id="mobile" pattern="\d{10}" formControlName="mobile" @type="text" @value={{this.registerData.mobile}} required placeholder="Mobile" />    
+        </div>
+
+        <div class="col-md-4 m-2">
+            <Input  autocomplete="off" class="form-control" id="username" formControlName="username" @type="text" @value={{this.registerData.username}} required placeholder="Username" />  
+        </div>
+
+        <div class="col-md-4 m-2">
+            <Input class="form-control" oninvalid="this.setCustomValidity('Password Should contains 8-15 characters')" pattern="[A-Za-z0-9@_]{8,15}" autocomplete="off" formControlName="password" id="password" @type="password" @value={{this.registerData.password}} required placeholder="Password"/>
+        </div>
+        
+
+        <div class="form-group">
+            <button disabled={{if this.loading true false}} class="btn btn-cust" type="submit" >{{if this.loading 'Registering...' 'Register'}}</button>
+        </div>
+
+        {{#if this.error}}
+            <span class="error">{{this.error}}</span>
+        {{/if}}
+
+         <div class="form-group" class="btl-link-div">
+            <LinkTo @route="login" class="btl-link" >Back to Login</LinkTo>
+        </div>
+        
+    </form>
+</div>

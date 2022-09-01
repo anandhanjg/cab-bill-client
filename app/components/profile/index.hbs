@@ -1,0 +1,42 @@
+<div class="container">
+<div class="container-body">
+    <div class="card w-100">
+        <div class="card-body">
+            <h4 class="m-2">Personal Details</h4>
+            <form class="w-100" {{on 'submit' this.updateProfile}} {{on 'reset' this.setServiceProfile}}>
+                <div class="row">
+                    <div class="form-group col-5">
+                        <Input @type="text" @value={{this.pf.firstName}} class="form-control" id="firstName" placeholder="First Name" />
+                    </div>
+                    <div class="form-group col-5">
+                        <Input @type="text" @value={{this.pf.lastName}} class="form-control" id="lastName" placeholder="Last Name" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-5">
+                        <Input @type="text" @value={{this.pf.username}} class="form-control" id="username" placeholder="Username" />
+                    </div>
+
+                    <div class="form-group col-5">
+                        <Input @type="email" @value={{this.pf.email}} class="form-control" id="email" placeholder="Email" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-5">
+                        <Input @type="password" @value={{this.pf.password}} class="form-control" id="password" placeholder="Password" />
+                    </div>
+                </div>
+                <div class="m-2 d-flex flex-row">
+                    <button  type="submit" class="m-1 btn btn-cust" >Update</button>
+                    <button type="reset" class="m-1 btn btn-outline-secondary">Reset</button>
+                </div>
+                    {{#if this.error}}
+                        <div class="alert alert-danger mt-3 w-50" role="alert">
+                                {{this.error}}
+                        </div>
+                    {{/if}}
+            </form>
+        </div>
+    </div>
+</div>
+</div>

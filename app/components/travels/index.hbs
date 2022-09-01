@@ -1,0 +1,9 @@
+<div class="container">
+    <div class="d-flex justify-content-between m-3">
+        <h5>Travels Details</h5>
+        <button class="btn btn-cust" type="button" {{on 'click' this.openModalToSave}}>Add</button>
+    </div>
+    <DataTable @headers={{this.headers}} @dataList={{this.travels}} @onEdit={{this.onEdit}} @onDelete={{this.onDelete}}></DataTable>
+</div>
+
+<TravelModal @travel={{this.travel}} @opt={{this.opt}}></TravelModal>
